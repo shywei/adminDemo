@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页 | 后台管理系统</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta content='text/html;charset=utf-8' http-equiv='content-type'>
+    <meta content='Flat administration template for Twitter Bootstrap. Twitter Bootstrap 3 template with Ruby on Rails support.' name='description'>
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo-html.jpg" media="screen">
+    <!-- / START - page related stylesheets [optional] -->
+    
+    <!-- / END - page related stylesheets [optional] -->
+    <!-- / bootstrap [required] -->
+    <link href="assets/stylesheets/bootstrap/bootstrap.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- / theme file [required] -->
+    <link href="assets/stylesheets/light-theme.css" media="all" id="color-settings-body-color" rel="stylesheet" type="text/css" />
+    <!-- / coloring file [optional] (if you are going to use custom contrast color) -->
+    <link href="assets/stylesheets/theme-colors.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- / demo file [not required!] -->
+    <link href="assets/stylesheets/demo.css" media="all" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+      <script src="assets/javascripts/ie/html5shiv.js" type="text/javascript"></script>
+      <script src="assets/javascripts/ie/respond.min.js" type="text/javascript"></script>
+    <![endif]-->
+  </head>
+  <body class='contrast-fb'>
+    <header>
+		<nav class='navbar navbar-default'>
+			<a class='navbar-brand' href='index.html'> <img width="81"
+				height="21" class="logo" alt="Flatty" src="assets/images/logo.svg" />
+				<img width="21" height="21" class="logo-xs" alt="Flatty"
+				src="assets/images/logo_xs.svg" />
+			</a> <a class='toggle-nav btn pull-left' href='#'> <i
+				class='icon-reorder'></i>
+			</a>
+			<ul class='nav'>
+				<li class='dropdown dark user-menu'><a class='dropdown-toggle'
+					data-toggle='dropdown' href='#'> <img width="23" height="23"
+						alt="Mila Kunis" src="assets/images/avatar.jpg" /> <span
+						class='user-name'>管理员</span> <b class='caret'></b>
+				</a>
+					<ul class='dropdown-menu'>
+						<li><a href='user_profile.html'> <i class='icon-user'></i>
+								个人信息
+						</a></li>
+						<li><a href='user_profile.html'> <i class='icon-cog'></i>
+								修改密码
+						</a></li>
+						<li class='divider'></li>
+						<li><a href='sign_in.html'> <i class='icon-signout'></i>
+								退出登录
+						</a></li>
+					</ul></li>
+			</ul>
+		</nav>
+	</header>
+	<div id='wrapper'>
+		<div id='main-nav-bg'></div>
+		<nav id='main-nav'>
+			<div class='navigation'>
+				<div class='search'>
+					<form action='search_results.html' method='get'>
+						<div class='search-wrapper'>
+							<input value="" class="search-query form-control"
+								placeholder="Search..." autocomplete="off" name="q" type="text" />
+							<button class='btn btn-link icon-search' name='button'
+								type='submit'></button>
+						</div>
+					</form>
+				</div>
+				<ul class='nav nav-stacked'>
+					<li class=''><a href='welcom.html'> <i
+							class='icon-dashboard'></i> <span>首页</span>
+					</a></li>
+					<li class='active'><a class="dropdown-collapse" href="#"><i
+							class='icon-edit'></i> <span>人员管理</span> <i
+							class='icon-angle-down angle-down'></i> </a>
+
+						<ul class='in nav nav-stacked'>
+							<li class=''><a href='table.html'> <i
+									class='icon-caret-right'></i> <span>表格页面</span>
+							</a></li>
+							<li class='active'><a href='form.html'> <i
+									class='icon-caret-right'></i> <span>编辑画面</span>
+							</a></li>
+						</ul></li>
+					<li><a class='dropdown-collapse' href='#'> <i
+							class='icon-folder-open-alt'></i> <span>多级菜单</span> <i class='icon-angle-down angle-down'></i>
+					</a>
+						<ul class='nav nav-stacked'>
+							<li><a class='dropdown-collapse' href='#'> <i
+									class='icon-caret-right'></i> <span>Second level</span> <i
+									class='icon-angle-down angle-down'></i>
+							</a>
+								<ul class='nav nav-stacked'>
+									<li><a class='dropdown-collapse' href='#'> <i
+											class='icon-caret-right'></i> <span>Third level</span> <i
+											class='icon-angle-down angle-down'></i>
+									</a>
+										<ul class='nav nav-stacked'>
+											<li><a href='#'> <i class='icon-caret-right'></i> <span>Fourth
+														level</span>
+											</a></li>
+											<li><a href='#'> <i class='icon-caret-right'></i> <span>Another
+														fourth level</span>
+											</a></li>
+										</ul></li>
+								</ul></li>
+						</ul></li>
+				</ul>
+			</div>
+		</nav>
+      <section id='content'>
+        <div class='container'>
+          <div class='row' id='content-wrapper'>
+            <div class='col-xs-12'>
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='page-header'>
+                    <h1 class='pull-left'>
+                      <i class='icon-edit'></i>
+                      <span>编辑画面</span>
+                    </h1>
+                    <div class='pull-right'>
+                      <ul class='breadcrumb'>
+                        <li>
+                          <a href='index.html'>
+                            <i class='icon-bar-chart'></i>
+                          </a>
+                        </li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li>
+                          	二级菜单
+                        </li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li class='active'>编辑画面</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='box bordered-box blue-border'>
+                    
+                    <div class='box-content box-double-padding'>
+                      <form class='form' style='margin-bottom: 0;'>
+                        <fieldset>
+                          <div class='col-sm-4'>
+                            <div class='form-group'>
+                              <label>Full name</label>
+                              <input class='form-control' id='full-name' type='text'>
+                            </div>
+                            <div class='form-group'>
+                              <label>Street</label>
+                              <input class='form-control' id='address-line2' placeholder='Street placeholder' type='text'>
+                              <p class='help-block'>
+                                <small class='text-muted'>Description for street field</small>
+                              </p>
+                            </div>
+                            <div class='form-group'>
+                              <label>City</label>
+                              <input class='form-control' id='city' placeholder='City placeholder' type='text'>
+                            </div>
+                          </div>
+                          <div class='col-sm-7 col-sm-offset-1'>
+                            <div class='form-group'>
+                              <label>Full name</label>
+                              <input class='form-control' id='full-name' type='text'>
+                            </div>
+                            <div class='form-group'>
+                              <label>Street</label>
+                              <input class='form-control' id='address-line2' placeholder='Street placeholder' type='text'>
+                              <p class='help-block'>
+                                <small class='text-muted'>Description for street field</small>
+                              </p>
+                            </div>
+                            <div class='form-group'>
+                              <label>City</label>
+                              <input class='form-control' id='city' placeholder='City placeholder' type='text'>
+                            </div>
+                            <div class='form-group'>
+                              <label>Company</label>
+                              <div class='row'>
+                                <div class='col-sm-6 col-md-6 col-lg-4'>
+                                  <div class='input-group'>
+                                    <input class='form-control' id='appendedInputButtons1' type='text'>
+                                    <span class='input-group-btn'>
+                                      <button class='btn' type='button'>
+                                        <i class='icon-building'></i>
+                                      </button>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <hr class='hr-normal'>
+                        <fieldset>
+                          <div class='col-sm-4'>
+                            <div class='box'>
+                              <div class='lead'>
+                                <i class='icon-ambulance contrast'></i>
+                                Dapibus suscipit arcu
+                              </div>
+                              <small class='text-muted'>Proin eu nibh ut urna tristique rhoncus. Sed euismod, quam sed dignissim imperdiet, nulla leo vehicula mi, a sagittis lacus augue nec sapien.</small>
+                            </div>
+                          </div>
+                          <div class='col-sm-7 col-sm-offset-1'>
+                            <div class='form-group'>
+                              <label>Disabled input</label>
+                              <input class='form-control' disabled id='full-name1' type='text'>
+                            </div>
+                            <div class='form-group'>
+                              <label class='checkbox-inline'>
+                                <input id='inlineCheckbox1' type='checkbox' value='option1'>
+                                Inline 1
+                              </label>
+                              <label class='checkbox-inline'>
+                                <input id='inlineCheckbox2' type='checkbox' value='option2'>
+                                Inline 2
+                              </label>
+                              <label class='checkbox-inline'>
+                                <input id='inlineCheckbox3' type='checkbox' value='option3'>
+                                Inline 3
+                              </label>
+                            </div>
+                            <div class='form-group'>
+                              <label>Money</label>
+                              <div class='row'>
+                                <div class='col-sm-6 col-md-6 col-lg-4'>
+                                  <div class='input-group'>
+                                    <span class='input-group-addon'>
+                                      $
+                                    </span>
+                                    <input class='form-control input-lg text-right' id='appendedPrependedInput' type='text'>
+                                    <span class='input-group-addon'>.00</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <div class='form-actions'>
+                          <div class='row'>
+                            <div class='col-sm-7 col-sm-offset-5'>
+                              <div class='btn btn-primary btn-lg'>
+                                <i class='icon-save'></i>
+                                Save
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              </div>
+          </div>
+          <footer id='footer'>
+            <div class='footer-wrapper'>
+              <div class='row'>
+                <div class='col-sm-6 text'>
+                  Copyright © 2013 Your Project Name
+                </div>
+                <div class='col-sm-6 buttons'>
+                  <a class="btn btn-link" href="../flatty">Preview</a>
+                  <a class="btn btn-link" href="../../wrapbootstrap.com/theme/flatty-flat-administration-template-WB0P6NR1N">Purchase</a>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+    </div>
+    <!-- / jquery [required] -->
+    <script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <!-- / jquery mobile (for touch events) -->
+    <script src="assets/javascripts/jquery/jquery.mobile.custom.min.js" type="text/javascript"></script>
+    <!-- / jquery migrate (for compatibility with new jquery) [required] -->
+    <script src="assets/javascripts/jquery/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- / jquery ui -->
+    <script src="assets/javascripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- / jQuery UI Touch Punch -->
+    <script src="assets/javascripts/plugins/jquery_ui_touch_punch/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+    <!-- / bootstrap [required] -->
+    <script src="assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>
+    <!-- / modernizr -->
+    <script src="assets/javascripts/plugins/modernizr/modernizr.min.js" type="text/javascript"></script>
+    <!-- / retina -->
+    <script src="assets/javascripts/plugins/retina/retina.js" type="text/javascript"></script>
+    <!-- / theme file [required] -->
+    <script src="assets/javascripts/theme.js" type="text/javascript"></script>
+    <!-- / demo file [not required!] -->
+    <script src="assets/javascripts/demo.js" type="text/javascript"></script>
+    <!-- / START - page related files and scripts [optional] -->
+    
+    <!-- / END - page related files and scripts [optional] -->
+  </body>
+</html>
