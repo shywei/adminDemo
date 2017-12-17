@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>首页 | 静脉分析点名系统</title>
+<title>修改密码 | 后台管理系统</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -12,13 +12,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="img/logo-html.jpg"
 	media="screen">
 <!-- / START - page related stylesheets [optional] -->
-<link
-	href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css"
-	media="all" rel="stylesheet" type="text/css" />
-<link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css"
-	media="all" rel="stylesheet" type="text/css" />
-<link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css"
-	media="all" rel="stylesheet" type="text/css" />
+
 <!-- / END - page related stylesheets [optional] -->
 <!-- / bootstrap [required] -->
 <link href="assets/stylesheets/bootstrap/bootstrap.css" media="all"
@@ -35,7 +29,7 @@
       <script src="assets/javascripts/ie/respond.min.js" type="text/javascript"></script>
     <![endif]-->
 </head>
-<body class='contrast-fb '>
+<body class='contrast-fb'>
 	<header>
 		<nav class='navbar navbar-default head'>
 			<a class='navbar-brand' href='welcom.html'> <img class="logo"
@@ -45,8 +39,8 @@
 				<li><a class="login-info" href="javascript:void(0);"> <i
 						class='icon-user'></i> 你好，管理员
 				</a></li>
-				<li><a class="login-info border-double"
-					href='user_profile.html'> <i class='icon-lock'></i> 修改密码
+				<li><a class="login-info border-double" id="changePass"
+					href="changePass.html"> <i class='icon-lock'></i> 修改密码
 				</a></li>
 				<li><a class="login-info" id="logout"> <i
 						class='icon-signout'></i> 退出登录
@@ -59,15 +53,15 @@
 		<nav id='main-nav'>
 			<div class='navigation'>
 				<ul class='nav nav-stacked'>
-					<li class='active'><a href='welcom.html'> <i
-							class='icon-dashboard'></i> <span>首页</span>
+					<li><a href='welcom.html'> <i class='icon-dashboard'></i>
+							<span>首页</span>
 					</a></li>
 					<li><a class="dropdown-collapse" href="#"><i
 							class='icon-edit'></i> <span>戒毒人员</span> <i
 							class='icon-angle-down angle-down'></i> </a>
 
 						<ul class='nav nav-stacked'>
-							<li class='active'><a href='table.html'> <i
+							<li class=''><a href='table.html'> <i
 									class='icon-caret-right'></i> <span>人员管理</span>
 							</a></li>
 							<li class=''><a href='form.html'> <i
@@ -162,60 +156,74 @@
 			<div class='container'>
 				<div class='row' id='content-wrapper'>
 					<div class='col-xs-12'>
-
-						<div class='page-header page-header-with-buttons'>
-							<h1 class='pull-left'>
-								<i class='icon-dashboard'></i> <span>首页</span>
-							</h1>
-						</div>
-
-						<div class='alert alert-info alert-dismissable'>
-							<a class='close' data-dismiss='alert' href='#'>&times;</a>
-							欢迎使用XX系统，今天是XXXX年XX月XX日，星期X。
-						</div>
-
 						<div class='row'>
-							<div class='col-sm-8'>
-								<div class="box">
-									<div class='box-content'>
-										<div id='column' style="height: 640px"></div>
-									</div>
-								</div>
-							</div>
-							<div class='col-sm-4'>
-								<div class='box'>
-									<div class='row'>
-										<div class='col-sm-12'>
-											<div class='box-content box-statistic'>
-												<h4 class='title lead'>
-													在册人数：<span id="registeredNum">100</span></h4>
-												
-												<h4 class='title lead'>在所人数：<span id="extantNum">98</span>
-												</h4>	
-												<h4 class='title lead'>所外就医：<span
-														id="externalMedicalTreatment">2</span>
-												</h4>	
-												<h4 class='title lead'>出工人数：<span id="rollCallNum">95</span>
-												</h4>	
-												<h4 class='title lead'>无掌静脉人数：<span
-														id="noMetacarpalVein">5</span>
-												</h4>	
-												<h4 class='title lead'>无照片人数：<span id="noPhoto">2</span>
-												</h4>	
-												<h4 class='title lead'>异常掌静脉终端数：<span
-														id="abnormalDevice">0</span>
-												</h4>							
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="box">
-									<div class='box-content'>
-										<div id='pie'></div>
+							<div class='col-sm-12'>
+								<div class='page-header'>
+									<h1 class='pull-left'>
+										<i class='icon-edit'></i> <span>修改密码</span>
+									</h1>
+									<div class='pull-right'>
+										<ul class='breadcrumb'>
+											<li><a href='index.html'> <i class='icon-bar-chart'></i>
+											</a></li>
+											<li class='separator'><i class='icon-angle-right'></i></li>
+											<li class='active'>修改密码</li>
+										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class='row'>
+							<div class='col-sm-12'>
+								<div class='box bordered-box blue-border'>
+
+									<div class='box-content box-double-padding'>
+										<form class="form form-horizontal" style="margin-bottom: 0;"
+											method="post" action="#" accept-charset="UTF-8">
+											<div class='form-group'>
+												<label class='col-md-2 control-label' for='disabledInput1'>用户ID</label>
+												<div class='col-md-5'>
+													<input class='form-control' disabled='' id='disabledInput1'
+														value="admin" type='text'>
+												</div>
+											</div>	
+											<div class='form-group'>
+												<label class='col-md-2 control-label' for='oldPassword'>旧密码</label>
+												<div class='col-md-5'>
+													<input class='form-control' id='oldPassword'
+														placeholder='请输入旧密码' type='password'>
+												</div>
+											</div>
+											<div class='form-group'>
+												<label class='col-md-2 control-label' for='newPassword'>新密码</label>
+												<div class='col-md-5'>
+													<input class='form-control' id='newPassword'
+														placeholder='请输入新密码' type='password'>
+												</div>
+											</div>		
+											<div class='form-group'>
+												<label class='col-md-2 control-label' for='repeatNewPassword'>重复新密码</label>
+												<div class='col-md-5'>
+													<input class='form-control' id='repeatNewPassword'
+														placeholder='请重复新密码' type='password'>
+												</div>
+											</div>								
+											<div class='form-actions form-actions-padding-sm'>
+												<div class='row'>
+													<div class='col-md-10 col-md-offset-2'>
+														<button class='btn btn-primary' type='submit'>
+															<i class='icon-save'></i> 确认
+														</button>
+														<button class='btn' type='submit'>取消</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -251,139 +259,7 @@
 	<!-- / demo file [not required!] -->
 	<script src="assets/javascripts/demo.js" type="text/javascript"></script>
 	<!-- / START - page related files and scripts [optional] -->
-	<script src="assets/javascripts/plugins/flot/excanvas.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/flot/flot.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/flot/flot.resize.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/common/moment.min.js"
-		type="text/javascript"></script>
-	<script
-		src="assets/javascripts/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/bootbox/bootbox.min.js"
-		type="text/javascript"></script>
-	<script
-		src="assets/javascripts/plugins/slimscroll/jquery.slimscroll.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/timeago/jquery.timeago.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/common/wysihtml5.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/common/bootstrap-wysihtml5.js"
-		type="text/javascript"></script>
-	<script
-		src="assets/javascripts/plugins/fullcalendar/fullcalendar.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/bootbox/bootbox.min.js"
-		type="text/javascript"></script>
 
-	<script src="js/highcharts.js" type="text/javascript"></script>
-	<script src="js/highcharts-zh_CN.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('#column')
-					.highcharts(
-							{
-								chart : {
-									type : 'column'
-								},
-								title : {
-									text : '七大队近期考勤数据'
-								},
-								xAxis : {
-									categories : [ '2017-11-11 08:30',
-											'2017-11-11 12:30',
-											'2017-11-11 16:30' ]
-								},
-								yAxis : {
-									allowDecimals : false,
-									min : 0,
-									title : {
-										text : '人数'
-									}
-								},
-								tooltip : {
-									formatter : function() {
-										return '<b>' + this.x + '</b><br/>'
-												+ this.series.name + ': '
-												+ this.y + '<br/>' + '总量: '
-												+ this.point.stackTotal;
-									}
-								},
-								plotOptions : {
-									column : {
-										stacking : 'normal'
-									}
-								},
-								credits : {
-									enabled : false
-								},
-								colors : [ '#66CCFF', '#FF9900', '#FF0000',
-										'#50B432' ],
-								series : [ {
-									name : '在所人数',
-									data : [ 5, 3, 4 ],
-									stack : 'colum1'
-								}, {
-									name : '出工人数',
-									data : [ 3, 4, 4 ],
-									stack : 'colum2'
-								}, {
-									name : '缺勤人数',
-									data : [ 3, 0, 4 ],
-									stack : 'colum3'
-								}, {
-									name : '实到人数',
-									data : [ 2, 5, 6 ],
-									stack : 'colum3'
-								} ]
-							});
-			$('#pie')
-					.highcharts(
-							{
-								chart : {
-									plotBackgroundColor : null,
-									plotBorderWidth : null,
-									plotShadow : false
-								},
-								title : {
-									text : '最新点名未出工分析'
-								},
-								tooltip : {
-									headerFormat : '{series.name}<br>',
-									pointFormat : '{point.name}: <b>{point.percentage:.1f}%</b>'
-								},
-								credits : {
-									enabled : false
-								},
-								plotOptions : {
-									pie : {
-										allowPointSelect : true,
-										cursor : 'pointer',
-										dataLabels : {
-											enabled : true,
-											format : '{point.percentage:.1f} %',
-											style : {
-												color : (Highcharts.theme && Highcharts.theme.contrastTextColor)
-														|| 'black'
-											}
-										},
-										showInLegend : true
-									}
-								},
-								series : [ {
-									type : 'pie',
-									name : '未出工分析',
-									data : [ [ '零星劳作', 60 ], [ '正常探访', 20 ],
-											[ '零星探访', 10 ], [ '医院就诊', 5 ],
-											[ '所外就医', 2 ], [ '夜岗', 1 ],
-											[ '大院固定楼岗', 1 ], [ '大账员', 1 ] ]
-								} ]
-							});
-		});
-	</script>
 	<!-- / END - page related files and scripts [optional] -->
 </body>
 </html>

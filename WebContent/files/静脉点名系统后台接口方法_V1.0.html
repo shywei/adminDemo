@@ -1,0 +1,2333 @@
+<!DOCTYPE html><html><head><title>静脉点名系统后台接口方法</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h1 id="静脉点名系统后台接口方法">静脉点名系统后台接口方法</h1>
+
+<p><strong>修订记录</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>版本</th>
+  <th>日期</th>
+  <th>描述</th>
+  <th>修订人</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>1.0</td>
+  <td>2017-12-15</td>
+  <td>初版，统计图相关方法未就绪</td>
+  <td>顾涛</td>
+</tr>
+</tbody></table>
+
+
+<div><div class="toc"><div class="toc">
+<ul>
+<li><a href="#静脉点名系统后台接口方法">静脉点名系统后台接口方法</a><ul>
+<li><a href="#共通">共通</a><ul>
+<li><a href="#接口方法的返回值">接口方法的返回值</a></li>
+<li><a href="#获取系统相关数据集数据字典">获取系统相关数据集（数据字典）</a></li>
+</ul>
+</li>
+<li><a href="#首页">首页</a><ul>
+<li><a href="#近期考勤数据">近期考勤数据</a></li>
+<li><a href="#首页统计数据">首页统计数据</a></li>
+<li><a href="#最新点名未出工数据">最新点名未出工数据</a></li>
+</ul>
+</li>
+<li><a href="#戒毒人员管理">戒毒人员管理</a><ul>
+<li><a href="#登记人员">登记人员</a></li>
+<li><a href="#删除人员">删除人员</a></li>
+<li><a href="#修改人员信息">修改人员信息</a></li>
+<li><a href="#获取人员列表">获取人员列表</a></li>
+<li><a href="#变更人员状态">变更人员状态</a></li>
+<li><a href="#调队操作">调队操作</a></li>
+<li><a href="#取消调队">取消调队</a></li>
+<li><a href="#接收人员确认人员的部门变更由接收部分的人员来操作">接收人员（确认人员的部门变更，由接收部分的人员来操作）</a></li>
+</ul>
+</li>
+<li><a href="#点名管理">点名管理</a><ul>
+<li><a href="#当日工间点名信息列表">当日工间点名信息列表</a></li>
+<li><a href="#点名详情列表">点名详情列表</a></li>
+<li><a href="#开始点名">开始点名</a></li>
+<li><a href="#点名进行中状态信息">点名进行中状态信息</a></li>
+<li><a href="#暂停点名">暂停点名</a></li>
+<li><a href="#人员去向变更">人员去向变更</a></li>
+<li><a href="#点名完成信息列表">点名完成信息列表</a></li>
+</ul>
+</li>
+<li><a href="#用户权限">用户权限</a><ul>
+<li><a href="#获取一级菜单">获取一级菜单</a></li>
+<li><a href="#获取二级菜单">获取二级菜单</a></li>
+<li><a href="#增加单位">增加单位</a></li>
+<li><a href="#删除单位">删除单位</a></li>
+<li><a href="#修改单位">修改单位</a></li>
+<li><a href="#查询单位列表条件">查询单位列表（条件）</a></li>
+<li><a href="#获取单位id名称数据">获取单位ID名称数据</a></li>
+<li><a href="#增加角色">增加角色</a></li>
+<li><a href="#删除角色">删除角色</a></li>
+<li><a href="#修改角色">修改角色</a></li>
+<li><a href="#获取全部角色列表">获取全部角色列表</a></li>
+<li><a href="#获取角色id名称数据">获取角色ID名称数据</a></li>
+<li><a href="#获取角色权限列表">获取角色权限列表</a></li>
+<li><a href="#设置角色权限">设置角色权限</a></li>
+<li><a href="#掌静脉终端管理员下发">掌静脉终端管理员下发</a></li>
+</ul>
+</li>
+<li><a href="#系统用户管理">系统用户管理</a><ul>
+<li><a href="#获取随机生成4位验证码">获取随机生成4位验证码</a></li>
+<li><a href="#用户登录">用户登录</a></li>
+<li><a href="#退出系统">退出系统</a></li>
+<li><a href="#新增系统用户">新增系统用户</a></li>
+<li><a href="#删除系统用户">删除系统用户</a></li>
+<li><a href="#修改系统用户">修改系统用户</a></li>
+<li><a href="#查询系统用户列表全部条件">查询系统用户列表（全部/条件）</a></li>
+<li><a href="#重置用户密码">重置用户密码</a></li>
+<li><a href="#修改用户密码">修改用户密码</a></li>
+</ul>
+</li>
+<li><a href="#数据统计">数据统计</a><ul>
+<li><a href="#所统计">所统计</a></li>
+<li><a href="#大队统计">大队统计</a></li>
+<li><a href="#中队统计">中队统计</a></li>
+</ul>
+</li>
+<li><a href="#操作日志">操作日志</a><ul>
+<li><a href="#操作日志查询">操作日志查询</a></li>
+</ul>
+</li>
+<li><a href="#设备管理">设备管理</a><ul>
+<li><a href="#增加设备">增加设备</a></li>
+<li><a href="#删除设备">删除设备</a></li>
+<li><a href="#修改设备">修改设备</a></li>
+<li><a href="#获取设备列表全部条件">获取设备列表（全部/条件）</a></li>
+<li><a href="#获取设备名称数据管理员下发用">获取设备名称数据（管理员下发用）</a></li>
+<li><a href="#设备重启">设备重启</a></li>
+<li><a href="#初始化设备">初始化设备</a></li>
+<li><a href="#时间同步">时间同步</a></li>
+<li><a href="#状态检查">状态检查</a></li>
+<li><a href="#设备信息读取">设备信息读取</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<h2 id="共通">共通</h2>
+
+
+
+<h3 id="接口方法的返回值">接口方法的返回值</h3>
+
+<p>后台方法返回值为json数据，共通的封装形式如下：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs nimrod"><div class="hljs-line">{code:<span class="hljs-number">0</span>, message:null, obj:<span class="hljs-meta">{...}</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:非零数字, message:<span class="hljs-string">"错误信息"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取系统相关数据集数据字典">获取系统相关数据集（数据字典）</h3>
+
+<p>映射：/user/getUserFields</p>
+
+<p>参数：无</p>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    message:null,
+</div><div class="hljs-line">    obj:[{
+</div><div class="hljs-line">        field:<span class="hljs-string">"gender"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"性别"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"男"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"女"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"其他"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"pageSize"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"每页显示条数"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">10</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"10条/每页"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">20</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"20条/每页"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">30</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"30条/每页"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"hasMetacarpalVein"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"是否录入掌静脉"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"已录入"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"未录入"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"userState"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"人员状态"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"出工"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"零星劳作"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"正常探访"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"零星探访"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">4</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"医院就诊"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">5</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"所外就医"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">6</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"夜岗"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">7</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"大院固定楼岗"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">8</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"大账员"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"reviseState"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"调队状态"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"正常"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"调队中"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"maritalStatus"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"婚姻状况"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"未婚"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"已婚"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"离婚"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"cardType"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"证件类型"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"居民身份证"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"居住证"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"签证"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"护照"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">4</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"港澳通行证"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"deviceType"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"设备类型"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"一体机"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"考勤机"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"deviceModel"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"设备种类"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"D1332"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"applicationModel"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"应用模式"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"点名"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"门禁"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"deviceState"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"设备状态"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"连接正常"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"连接异常"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">field</span>:<span class="hljs-string">"enabled"</span>,
+</div><div class="hljs-line">        fieldName:<span class="hljs-string">"是否启用"</span>,
+</div><div class="hljs-line">        values:[{
+</div><div class="hljs-line">            fieldValue:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"禁用"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line">            <span class="hljs-attribute">fieldValue</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">            fieldValueDisplay:<span class="hljs-string">"启用"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取系统相关数据集出错！"</span>, obj:null}
+</div></code></pre>
+
+<h2 id="首页">首页</h2>
+
+
+
+<h3 id="近期考勤数据">近期考勤数据</h3>
+
+<p>映射：/main/recentAttendanceData</p>
+
+
+
+<h3 id="首页统计数据">首页统计数据</h3>
+
+<p>映射：/main/statistics</p>
+
+<p>参数：</p>
+
+<ul><li>userId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        registeredNum:</span><span class="hljs-number">100</span>, <span class="hljs-comment">//在册人数</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        extantNum:</span><span class="hljs-number">98</span>, <span class="hljs-comment">//在所人数</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        externalMedicalTreatment:</span><span class="hljs-number">2</span>, <span class="hljs-comment">//所外就医</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        rollCallNum:</span><span class="hljs-number">95</span>, <span class="hljs-comment">//出工人数</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        noMetacarpalVein:</span><span class="hljs-number">5</span>, <span class="hljs-comment">//无掌静脉人数</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        noPhoto:</span><span class="hljs-number">2</span>, <span class="hljs-comment">//无照片人数</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        abnormalDevice:</span><span class="hljs-number">0</span>  <span class="hljs-comment">//异常掌静脉终端数</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取首页统计数据出错！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="最新点名未出工数据">最新点名未出工数据</h3>
+
+<p>映射：/main/latestNoWorkData</p>
+
+
+
+<h2 id="戒毒人员管理">戒毒人员管理</h2>
+
+<h3 id="登记人员">登记人员</h3>
+
+<p>映射：/user/addUser</p>
+
+<p>参数：</p>
+
+<ul><li>officalNumber 所编号（唯一）</li>
+<li>userName 姓名</li>
+<li>gender 性别</li>
+<li>height 身高</li>
+<li>deptId 所属单位ID</li>
+<li>createTime 入所时间</li>
+<li>nationalities 民族</li>
+<li>isMarried 婚否</li>
+<li>cardType 证件类型</li>
+<li>cardNum 证件号码</li>
+<li>contact 联系人</li>
+<li>contactNum 联系人电话</li>
+<li>homeAddress 家庭住址</li>
+<li>residenceAdress 户口所在地</li>
+<li>metacarpalVein 掌静脉数据</li>
+<li>photoUrl 照片Url</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:idValue}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"戒毒人员所编号已经存在！"</span>, obj:null}
+</div><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"登记戒毒人员失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="删除人员">删除人员</h3>
+
+<p>映射：/user/deleteUser</p>
+
+<p>参数：</p>
+
+<ul><li>userIds 以逗号分隔的人员ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"删除戒毒人员失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="修改人员信息">修改人员信息</h3>
+
+<p>映射：/user/modifyUser</p>
+
+<p>参数：</p>
+
+<ul><li>id 主键</li>
+<li>officalNumber 所编号（唯一）</li>
+<li>userName 姓名</li>
+<li>gender 性别</li>
+<li>height 身高</li>
+<li>createTime 入所时间</li>
+<li>nationalities 民族</li>
+<li>isMarried 婚否</li>
+<li>cardType 证件类型</li>
+<li>cardNum 证件号码</li>
+<li>contact 联系人</li>
+<li>contactNum 联系人电话</li>
+<li>homeAddress 家庭住址</li>
+<li>residenceAdress 户口所在地</li>
+<li>metacarpalVein 掌静脉数据</li>
+<li>photoUrl 照片Url <br>
+返回：</li>
+<li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"戒毒人员所编号已经存在！"</span>, obj:null}
+</div><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改戒毒人员失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取人员列表">获取人员列表</h3>
+
+<p>映射：/user/getUserList</p>
+
+<p>参数：</p>
+
+<ul><li>userName 姓名</li>
+<li>officalNumber 所编号</li>
+<li>userState 用户状态</li>
+<li>createTime 入所日期</li>
+<li>deptId 所属单位</li>
+<li>confirmChangeDept 接收人员页面时置1，否则置零</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170300"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            gender:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line">            height：<span class="hljs-string">"162"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptId:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017/06/05"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            nationalities:</span><span class="hljs-string">"汉"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            maritalStatus:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            cardType:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            cardNum:</span><span class="hljs-string">"371324198007156445"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            contact:</span><span class="hljs-string">"刘邦娥"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            contactNum:</span><span class="hljs-string">"13073468560"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            homeAddress:</span><span class="hljs-string">"江苏省南京市鼓楼区张王庙1号丁香花园4栋3单元710室"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            residenceAdress:</span><span class="hljs-string">"江苏省南京市鼓楼区金陵新二村47幢二单元301室"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            hasMetacarpalVein:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userState:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170292"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"吕莉"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            gender:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line">            height：<span class="hljs-string">"175"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptId:</span><span class="hljs-number">6</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017/06/05"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            nationalities:</span><span class="hljs-string">"汉"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            maritalStatus:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            cardType:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            cardNum:</span><span class="hljs-string">"320107197201052648"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            contact:</span><span class="hljs-string">"王靖安"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            contactNum:</span><span class="hljs-string">"13905164273"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            homeAddress:</span><span class="hljs-string">"江苏省南京市秦淮区富丽山庄14幢408室"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            residenceAdress:</span><span class="hljs-string">"江苏省南京市秦淮区富丽山庄14幢408室"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            hasMetacarpalVein:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userState:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"查询戒毒人员列表失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="变更人员状态">变更人员状态</h3>
+
+<p>映射：/user/modifyUserState</p>
+
+<p>参数：</p>
+
+<ul><li>userIds 以逗号分隔的人员ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"变更戒毒人员状态失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="调队操作">调队操作</h3>
+
+<p>映射：/user/changeUserDept</p>
+
+<p>参数：</p>
+
+<ul><li>userIds 以逗号分隔的人员ID</li>
+<li>targetDeptId 目标单位ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改戒毒人员所属单位失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="取消调队">取消调队</h3>
+
+<p>映射：/user/cancelChangeUserDept</p>
+
+<p>参数：</p>
+
+<ul><li>userIds 以逗号分隔的人员ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"取消修改戒毒人员所属单位失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="接收人员确认人员的部门变更由接收部分的人员来操作">接收人员（确认人员的部门变更，由接收部分的人员来操作）</h3>
+
+<p>映射：/user/confirmChangeUserDept</p>
+
+<p>参数：</p>
+
+<ul><li>userIds 以逗号分隔的人员ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"确认戒毒人员所属单位变更失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h2 id="点名管理">点名管理</h2>
+
+
+
+<h3 id="当日工间点名信息列表">当日工间点名信息列表</h3>
+
+<p>映射：/rollCall/getCurrentRollCallList</p>
+
+<p>参数：</p>
+
+<ul><li>userId</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            eventId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startTime:</span><span class="hljs-string">"2017/12/10 08:00:00"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            state:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            registeredNum:</span><span class="hljs-number">100</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            extantNum:</span><span class="hljs-number">98</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallNum:</span><span class="hljs-number">90</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            attendNum:</span><span class="hljs-number">85</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            absentNum:</span><span class="hljs-number">5</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            eventId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startTime:</span><span class="hljs-string">"2017/12/10 14:00:00"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            state:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            registeredNum:</span><span class="hljs-number">100</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            extantNum:</span><span class="hljs-number">98</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallNum:</span><span class="hljs-number">90</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            attendNum:</span><span class="hljs-number">85</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            absentNum:</span><span class="hljs-number">5</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取当日工间点名信息列表失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="点名详情列表">点名详情列表</h3>
+
+<p>映射：/rollCall/getRollCallDetails</p>
+
+<p>参数：</p>
+
+<ul><li>eventId</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">4</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170300"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">""</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">""</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">""</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170302"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王明"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">"零星劳作"</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">""</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">""</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170304"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"赵氏"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">"医院就诊"</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">""</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">""</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170306"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王明"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">""</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">"七大队工间"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">"2017/11/19 08:30:09"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取点名详情列表失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="开始点名">开始点名</h3>
+
+<p>映射：//rollCall/beginRollCall</p>
+
+<p>参数：</p>
+
+<ul><li>loginUserId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:eventId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"开始点名操作失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="点名进行中状态信息">点名进行中状态信息</h3>
+
+<p>映射：/rollCall/getRollCallStateInfo</p>
+
+<p>参数：</p>
+
+<ul><li>eventId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        head:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            extantNum:</span><span class="hljs-number">100</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallNum:</span><span class="hljs-number">98</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            waitingRollCallNum:</span><span class="hljs-number">22</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        waitingRollCall:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170300"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕1"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170300.jpg"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170301"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕2"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170301.jpg"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">3</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170302"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕3"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170302.jpg"</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line"><span class="hljs-symbol">        talkingRollCall:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">4</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170303"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"吕铃"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170303.jpg"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line"><span class="hljs-symbol">        finishRollCall:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">5</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170304"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕4"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170304.jpg"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">6</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170305"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕5"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170305.jpg"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">7</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170306"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕6"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            photoUrl:</span><span class="hljs-string">"3206170306.jpg"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取点名进行中状态信息失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="暂停点名">暂停点名</h3>
+
+<p>映射：/rollCall/pauseRollCall</p>
+
+<p>参数：</p>
+
+<ul><li>eventId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"暂停点名操作失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="人员去向变更">人员去向变更</h3>
+
+<p>映射：/rollCall/changeUserState</p>
+
+<p>参数：</p>
+
+<ul><li>userIds 以逗号分隔的人员ID列表</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"人员去向变更操作失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="点名完成信息列表">点名完成信息列表</h3>
+
+<p>映射：/rollCall/getRollCallFinishInfoList</p>
+
+<p>参数：</p>
+
+<ul><li>eventId</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        head:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            extantNum:</span><span class="hljs-number">100</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallNum:</span><span class="hljs-number">98</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            waitingRollCallNum:</span><span class="hljs-number">22</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170300"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王玉燕"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">""</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">""</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">""</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170302"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王明"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">"零星劳作"</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">""</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">""</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170304"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"赵氏"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">"医院就诊"</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">""</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">""</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            officalNumber:</span><span class="hljs-string">"3206170306"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"王明"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallStatus:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            rollCallMemo:</span><span class="hljs-string">""</span>,
+</div><div class="hljs-line">            areaName：<span class="hljs-string">"七大队工间"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordTime:</span><span class="hljs-string">"2017/11/19 08:30:09"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取点名完成信息操作失败！"</span>, obj:null}
+</div></code></pre>
+
+<h2 id="用户权限">用户权限</h2>
+
+
+
+<h3 id="获取一级菜单">获取一级菜单</h3>
+
+<p>映射：/authority/getMenuById</p>
+
+<p>参数：</p>
+
+<ul><li>loginUserId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    message:null,
+</div><div class="hljs-line">    obj:[{
+</div><div class="hljs-line">        menuId:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">        menuName:<span class="hljs-string">"戒毒人员"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">menuId</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">        menuName:<span class="hljs-string">"点名管理"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">menuId</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">        menuName:<span class="hljs-string">"数据统计"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">menuId</span>:<span class="hljs-number">4</span>,
+</div><div class="hljs-line">        menuName:<span class="hljs-string">"系统管理"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">menuId</span>:<span class="hljs-number">5</span>,
+</div><div class="hljs-line">        menuName:<span class="hljs-string">"设备管理"</span>
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取菜单失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取二级菜单">获取二级菜单</h3>
+
+<p>映射：/authority/getModelByIdAndMenuId</p>
+
+<p>参数：</p>
+
+<ul><li>loginUserId</li>
+<li>menuId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    message:null,
+</div><div class="hljs-line">    obj:[{
+</div><div class="hljs-line">        modelId:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">        modelName:<span class="hljs-string">"系统用户管理"</span>,
+</div><div class="hljs-line">        modelUrl:<span class="hljs-string">"systemUserManagement.html"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">modelId</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">        modelName:<span class="hljs-string">"单位管理"</span>,
+</div><div class="hljs-line">        modelUrl:<span class="hljs-string">"departmentManagement.html"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">modelId</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">        modelName:<span class="hljs-string">"角色管理"</span>,
+</div><div class="hljs-line">        modelUrl:<span class="hljs-string">"roleManagement.html"</span>
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取模块失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="增加单位">增加单位</h3>
+
+<p>映射：/authority/addDept</p>
+
+<p>参数：</p>
+
+<ul><li>deptName</li>
+<li>parentId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"增加单位失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="删除单位">删除单位</h3>
+
+<p>映射：/authority/deleteDept</p>
+
+<p>参数：</p>
+
+<ul><li>deptIds 以逗号分隔的部门ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"将要删除的单位拥有下级单位，不能被删除！"</span>, obj:null}
+</div><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"删除单位失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="修改单位">修改单位</h3>
+
+<p>映射：/authority/modifyDept</p>
+
+<p>参数：</p>
+
+<ul><li>deptId</li>
+<li>deptName</li>
+<li>parentId</li>
+<li>memo</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改单位失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="查询单位列表条件">查询单位列表（条件）</h3>
+
+<p>映射：/authority/getDeptList</p>
+
+<p>参数：</p>
+
+<ul><li>pageNo 页号</li>
+<li>pageSize 每页显示条数</li>
+<li>deptName</li>
+<li>parentId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"查询单位列表失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取单位id名称数据">获取单位ID名称数据</h3>
+
+<p>映射：/authority/getDeptIdName</p>
+
+<p>参数：</p>
+
+<ul><li>loginUserId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    message:null,
+</div><div class="hljs-line">    obj:[{
+</div><div class="hljs-line">        deptId:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">        deptName:<span class="hljs-string">"女子戒毒所"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deptId</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">        deptName:<span class="hljs-string">"女子戒毒所一大队"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deptId</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">        deptName:<span class="hljs-string">"女子戒毒所二大队"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deptId</span>:<span class="hljs-number">4</span>,
+</div><div class="hljs-line">        deptName:<span class="hljs-string">"女子戒毒所三大队一中队"</span>
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取单位ID名称数据错误！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="增加角色">增加角色</h3>
+
+<p>映射：/authority/addRole</p>
+
+<p>参数：</p>
+
+<ul><li>roleName</li>
+<li>roleModelList 角色拥有的以逗号分隔的模块ID列表</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"增加角色失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="删除角色">删除角色</h3>
+
+<p>映射：/authority/deleteRole</p>
+
+<p>参数：</p>
+
+<ul><li>roleId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"要删除角色含有账号，不能被删除！"</span>, obj:null}
+</div><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"删除角色失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="修改角色">修改角色</h3>
+
+<p>映射：/authority/modifyRole</p>
+
+<p>参数：</p>
+
+<ul><li>roleId</li>
+<li>roleName</li>
+<li>roleModelList 角色拥有的以逗号分隔的模块ID列表</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改角色失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取全部角色列表">获取全部角色列表</h3>
+
+<p>映射：/authority/getRoleList</p>
+
+<p>参数：</p>
+
+<ul><li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">3</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            roleId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            roleName:</span><span class="hljs-string">"管理员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017/12/07 10:33:05"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            updateTime:</span><span class="hljs-string">"2017/12/15 08:30:00"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            memo:</span><span class="hljs-string">"系统管理员"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            roleId:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            roleName:</span><span class="hljs-string">"信息中心"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017/12/08 10:43:15"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            updateTime:</span><span class="hljs-string">"2017/12/15 08:30:00"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            memo:</span><span class="hljs-string">"管理科管理员"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            roleId:</span><span class="hljs-number">3</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            roleName:</span><span class="hljs-string">"大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017/12/08 10:49:35"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            updateTime:</span><span class="hljs-string">"2017/12/15 08:30:00"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            memo:</span><span class="hljs-string">"大队级管理员"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取角色列表失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="获取角色id名称数据">获取角色ID名称数据</h3>
+
+<p>映射：//authority/getRoleIdName</p>
+
+<p>参数：</p>
+
+<ul><li>loginUserId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    message:null,
+</div><div class="hljs-line">    obj:[{
+</div><div class="hljs-line">        roleId:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">        roleName:<span class="hljs-string">"系统管理员"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">roleId</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">        roleName:<span class="hljs-string">"管理科"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">roleId</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">        roleName:<span class="hljs-string">"大队管理"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">roleId</span>:<span class="hljs-number">4</span>,
+</div><div class="hljs-line">        roleName:<span class="hljs-string">"中队管理"</span>
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取角色ID名称数据错误！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取角色权限列表">获取角色权限列表</h3>
+
+<p>映射：/authority/getRoleModelList</p>
+
+<p>参数：</p>
+
+<ul><li>roleId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"戒毒人员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"人员管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"戒毒人员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"调队操作"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"戒毒人员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">3</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"接收人员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"点名管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">4</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"工间点名"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"数据统计"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">5</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"所统计"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"数据统计"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">6</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"大队统计"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"数据统计"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">7</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"中队统计"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"系统管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">8</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"系统用户管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"系统管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">9</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"单位管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"系统管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"角色管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"系统管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">11</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"管理员下发"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"日志管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">12</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"日志记录"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">1</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"设备管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">13</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"管理设备"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line"><span class="hljs-symbol">        menuName:</span><span class="hljs-string">"设备管理"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeId:</span><span class="hljs-number">14</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        modeName:</span><span class="hljs-string">"操作设备"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        enabled:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取角色权限列表失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="设置角色权限">设置角色权限</h3>
+
+<p>映射：/authority/setRoleModeList</p>
+
+<p>参数：</p>
+
+<ul><li>roleId</li>
+<li>ModelIdList 选中的以逗号分隔的模块ID列表</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"设置角色权限失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="掌静脉终端管理员下发">掌静脉终端管理员下发</h3>
+
+<p>映射：/authority/downloadAdmin</p>
+
+<p>参数：</p>
+
+<ul><li>systemUserIds 以逗号分隔的系统用户ID列表</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:deptId}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"掌静脉终端管理员下发失败！"</span>, obj:null}
+</div></code></pre>
+
+<h2 id="系统用户管理">系统用户管理</h2>
+
+
+
+<h3 id="获取随机生成4位验证码">获取随机生成4位验证码</h3>
+
+<p>映射：/systemUser/randomNum</p>
+
+<p>参数：无</p>
+
+<p>返回：obj - 四位随机数字字符串</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:<span class="hljs-string">"7510"</span>}
+</div></code></pre>
+
+
+
+<h3 id="用户登录">用户登录</h3>
+
+<p>映射：/systemUser/login</p>
+
+<p>参数：</p>
+
+<ul><li>loginName 登录名</li>
+<li>password 密码</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        id:</span><span class="hljs-number">8</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        loginName:</span><span class="hljs-string">"admin"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        userName:</span><span class="hljs-string">"管理员"</span>
+</div><div class="hljs-line"><span class="hljs-symbol">        origanization:</span><span class="hljs-string">"女所办公室"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        position:</span><span class="hljs-string">"职能科室"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        deptId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        deptName:</span><span class="hljs-string">"一大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        roleid:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        roleName:</span><span class="hljs-string">"系统管理员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">        createTime:</span><span class="hljs-string">"2017-12-08 12:05:09"</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"账户或密码错误！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="退出系统">退出系统</h3>
+
+<p>映射：/systemUser/logout</p>
+
+<p>参数：无</p>
+
+<p>返回：无</p>
+
+
+
+<h3 id="新增系统用户">新增系统用户</h3>
+
+<p>映射：/systemUser/addSystemUser</p>
+
+<p>参数：</p>
+
+<ul><li>loginName 登录名</li>
+<li>userName 用户名</li>
+<li>password 密码</li>
+<li>organization 单位</li>
+<li>position 岗位</li>
+<li>roleId 角色ID</li>
+<li>deptId 管理域ID</li>
+<li>metacarpalVein 掌静脉数据</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>, message:null, obj:用户ID}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"账户已经存在！"</span>, obj:null}
+</div><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"增加账户失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="删除系统用户">删除系统用户</h3>
+
+<p>映射：/systemUser/deleteSystemUser</p>
+
+<p>参数：</p>
+
+<ul><li>systemUserIds 以逗号分隔的系统用户ID</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"删除账号失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="修改系统用户">修改系统用户</h3>
+
+<p>映射：/systemUser/modifySystemUser</p>
+
+<p>参数：</p>
+
+<ul><li>id 主键</li>
+<li>userName 用户名</li>
+<li>organization 单位</li>
+<li>position 岗位</li>
+<li>roleId 角色ID</li>
+<li>deptId 管理域ID</li>
+<li>metacarpalVein 掌静脉数据</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改账号失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="查询系统用户列表全部条件">查询系统用户列表（全部/条件）</h3>
+
+<p>映射：/systemUser/getSystemUserList</p>
+
+<p>参数：</p>
+
+<ul><li>userName 用户名</li>
+<li>policeNumber 警号</li>
+<li>deptId 管理域ID</li>
+<li>roleId 角色ID</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            loginName:</span><span class="hljs-string">"admin"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"管理员"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            organization:</span><span class="hljs-string">"女子戒毒所"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            position:</span><span class="hljs-string">"管理科"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptId:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">            roleId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017-12-11 18:08:08"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            id:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            loginName:</span><span class="hljs-string">"ydd"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            userName:</span><span class="hljs-string">"一大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            organization:</span><span class="hljs-string">"女子戒毒所"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            position:</span><span class="hljs-string">"一大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptId:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            roleId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            createTime:</span><span class="hljs-string">"2017-12-11 18:08:08"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取系统用户列表信息失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="重置用户密码">重置用户密码</h3>
+
+<p>映射：/systemUser/resetSystemUserPassword</p>
+
+<p>参数：</p>
+
+<ul><li>systemUserId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"重置账号密码失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="修改用户密码">修改用户密码</h3>
+
+<p>映射：/systemUser/modifySystemUserPassword</p>
+
+<p>参数：</p>
+
+<ul><li>systemUserId</li>
+<li>password</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"账号的旧密码错误！"</span>, obj:null}
+</div><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改账号密码失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h2 id="数据统计">数据统计</h2>
+
+
+
+<h3 id="所统计">所统计</h3>
+
+
+
+<h3 id="大队统计">大队统计</h3>
+
+
+
+<h3 id="中队统计">中队统计</h3>
+
+
+
+<h2 id="操作日志">操作日志</h2>
+
+
+
+<h3 id="操作日志查询">操作日志查询</h3>
+
+<p>映射：/opLog/getOpLog</p>
+
+<p>参数：</p>
+
+<ul><li>operationTime</li>
+<li>operatorName</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            operationTime:</span><span class="hljs-string">"2017/11/05 09:33:46"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operatorName:</span><span class="hljs-string">"一大队队长"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptName:</span><span class="hljs-string">"一大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operationContext:</span><span class="hljs-string">"进行点名操作"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            operationTime:</span><span class="hljs-string">"2017/11/05 09:33:46"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operatorName:</span><span class="hljs-string">"二大队队长"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptName:</span><span class="hljs-string">"二大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operationContext:</span><span class="hljs-string">"进行点名操作"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            operationTime:</span><span class="hljs-string">"2017/11/05 09:33:46"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operatorName:</span><span class="hljs-string">"三大队队长"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptName:</span><span class="hljs-string">"三大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operationContext:</span><span class="hljs-string">"进行点名操作"</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            operationTime:</span><span class="hljs-string">"2017/11/05 09:33:46"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operatorName:</span><span class="hljs-string">"四大队队长"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deptName:</span><span class="hljs-string">"四大队"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operationContext:</span><span class="hljs-string">"进行点名操作"</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取日志记录失败！"</span>, obj:null}
+</div></code></pre>
+
+<h2 id="设备管理">设备管理</h2>
+
+
+
+<h3 id="增加设备">增加设备</h3>
+
+<p>映射：/device/addDevice</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId 设备编号（唯一）</li>
+<li>deviceName 设备名称</li>
+<li>deviceModel 设备型号</li>
+<li>deviceIp 设备IP</li>
+<li>devicePort 设备端口</li>
+<li>serverIp 服务器IP</li>
+<li>password 连接密码</li>
+<li>areaId 设备位置</li>
+<li>applicationModel 应用模式</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"增加掌静脉终端失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="删除设备">删除设备</h3>
+
+<p>映射：/device/deleteDevice</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId 设备编号</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"删除掌静脉终端失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="修改设备">修改设备</h3>
+
+<p>映射：/device/modifyDevice</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId 设备编号（唯一）</li>
+<li>deviceName 设备名称</li>
+<li>deviceModel 设备型号</li>
+<li>deviceIp 设备IP</li>
+<li>devicePort 设备端口</li>
+<li>serverIp 服务器IP</li>
+<li>password 连接密码</li>
+<li>areaId 设备位置</li>
+<li>applicationModel 应用模式</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"修改掌静脉终端失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="获取设备列表全部条件">获取设备列表（全部/条件）</h3>
+
+<p>映射：/device/getDeviceList</p>
+
+<p>参数：</p>
+
+<ul><li>deviceName</li>
+<li>deviceId</li>
+<li>deviceIp</li>
+<li>deviceStatus</li>
+<li>pageNo 页号</li>
+<li>pageSize 每页记录数</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">{
+</div><div class="hljs-line"><span class="hljs-symbol">    code:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">    message:</span>null,
+</div><div class="hljs-line"><span class="hljs-symbol">    obj:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        page:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            currentPage:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageSize:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            startRecordNum:</span><span class="hljs-number">0</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            endRecordNum:</span><span class="hljs-number">10</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            pageCount:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            recordCount:</span><span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line"><span class="hljs-symbol">        results:</span>[{
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceName:</span><span class="hljs-string">"工间点名1"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceIp:</span><span class="hljs-string">"192.168.101.1"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceModel:</span><span class="hljs-string">"D1332"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            applicationModel:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line"><span class="hljs-symbol">            serverIp:</span><span class="hljs-string">"192.168.101.200"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operationType:</span><span class="hljs-string">"查看信息"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operatorResult:</span><span class="hljs-string">"版本号:V3.0.1,管理员(手):0"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            areaId:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceStatus:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">        },{
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceId:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceName:</span><span class="hljs-string">"工间点名2"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceIp:</span><span class="hljs-string">"192.168.101.2"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceModel:</span><span class="hljs-string">"D1332"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            applicationModel:</span><span class="hljs-number">1</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            serverIp:</span><span class="hljs-string">"192.168.101.200"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operationType:</span><span class="hljs-string">"查看信息"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            operatorResult:</span><span class="hljs-string">"版本号:V3.0.1,管理员(手):0"</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            areaId:</span><span class="hljs-number">2</span>,
+</div><div class="hljs-line"><span class="hljs-symbol">            deviceStatus:</span><span class="hljs-number">0</span>
+</div><div class="hljs-line">        }]
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取掌静脉终端列表失败！"</span>, obj:null}
+</div></code></pre>
+
+
+
+<h3 id="获取设备名称数据管理员下发用">获取设备名称数据（管理员下发用）</h3>
+
+<p>映射：/device/getDeviceNameData</p>
+
+<p>参数：无</p>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attribute">code</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    message:null,
+</div><div class="hljs-line">    obj:[{
+</div><div class="hljs-line">        deviceId:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">        deviceName:<span class="hljs-string">"全部"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deviceId</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">        deviceName:<span class="hljs-string">"工间点名1"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deviceId</span>:<span class="hljs-number">2</span>,
+</div><div class="hljs-line">        deviceName:<span class="hljs-string">"工间点名2"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deviceId</span>:<span class="hljs-number">3</span>,
+</div><div class="hljs-line">        deviceName:<span class="hljs-string">"工间点名3"</span>
+</div><div class="hljs-line">    },{
+</div><div class="hljs-line">        <span class="hljs-attribute">deviceId</span>:<span class="hljs-number">4</span>,
+</div><div class="hljs-line">        deviceName:<span class="hljs-string">"工间点名4"</span>
+</div><div class="hljs-line">    }]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"获取设备名称数据失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="设备重启">设备重启</h3>
+
+<p>映射：/device/rebootDevice</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"掌静脉终端设备重启失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="初始化设备">初始化设备</h3>
+
+<p>映射：/device/initializeDevice</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"掌静脉终端初始化设备失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="时间同步">时间同步</h3>
+
+<p>映射：/device/syncTime</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"掌静脉终端时间同步失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="状态检查">状态检查</h3>
+
+<p>映射：/device/deviceState</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"掌静脉终端状态检查失败！"</span>, obj:null}
+</div></code></pre>
+
+<h3 id="设备信息读取">设备信息读取</h3>
+
+<p>映射：/device/getDeviceInfo</p>
+
+<p>参数：</p>
+
+<ul><li>deviceId</li>
+</ul>
+
+<p>返回：</p>
+
+<ul><li>成功：</li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">{<span class="hljs-string">code:</span><span class="hljs-number">0</span>, <span class="hljs-string">message:</span><span class="hljs-literal">null</span>, <span class="hljs-string">obj:</span><span class="hljs-literal">null</span>}
+</div></code></pre>
+
+<ul><li>失败：</li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">{<span class="hljs-attribute">code</span>:xxxx, message:<span class="hljs-string">"掌静脉终端信息读取失败！"</span>, obj:null}
+</div></code></pre></div></body></html>

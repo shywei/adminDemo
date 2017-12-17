@@ -1,0 +1,39 @@
+header .head {
+	position: relative;
+	background: url("../img/headNew.png") no-repeat;
+	background-size: 100% 100%;
+	color: #fff;
+	/*min-width: 1350px;*/
+	height: 97px;
+	box-sizing: border-box;
+	width: 100%;
+	overflow: hidden;
+}
+
+#main-nav {
+	top: 97px;
+}
+
+.navbar-brand {
+	margin-top: 15px;
+	margin-left: 15px;
+}
+
+.contrast-fb header .navbar>.nav>li>.login-info {
+	background: none;
+	top: 25px;
+	height: 47px;
+	line-height: 47px;
+	font-size: 15px;
+}
+
+.border-double {
+	border-left: 1px solid;
+	border-right: 1px solid;
+}
+
+.card {
+	min-width: 150px;
+	max-width: 250px;
+	margin-bottom: 10px;
+}

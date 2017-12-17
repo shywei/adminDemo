@@ -1,0 +1,5 @@
+[1211/153226.418:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: パイプは終了しました。 (0x6D)
+[1211/211428.645:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: パイプは終了しました。 (0x6D)
+[1211/212316.244:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: パイプは終了しました。 (0x6D)
+[1212/093306.669:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: パイプは終了しました。 (0x6D)
+[1212/134533.116:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: パイプは終了しました。 (0x6D)
