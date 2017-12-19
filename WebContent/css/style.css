@@ -9,16 +9,13 @@ header .head {
 	width: 100%;
 	overflow: hidden;
 }
-
 #main-nav {
 	top: 97px;
 }
-
 .navbar-brand {
 	margin-top: 15px;
 	margin-left: 15px;
 }
-
 .contrast-fb header .navbar>.nav>li>.login-info {
 	background: none;
 	top: 25px;
@@ -26,14 +23,34 @@ header .head {
 	line-height: 47px;
 	font-size: 15px;
 }
-
 .border-double {
 	border-left: 1px solid;
 	border-right: 1px solid;
 }
-
-.card {
-	min-width: 150px;
-	max-width: 250px;
-	margin-bottom: 10px;
+.search-input {
+	width:100px;
+	display:inline;
+	margin-left:5px;
+}
+.search-label {
+	margin-right:15px;
+	display:inline-block;
+	float:left;
+}
+.no-verti-padding {
+	padding-left:0px;
+	padding-right:0px;
+}
+#per-page {
+	width: 60px;
+    height: 40px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 5px;
+    text-align:center;
+}
+.page-info {
+	height: 40px;
+	line-height: 40px;
+	text-align:left;
 }

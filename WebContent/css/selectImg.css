@@ -1,37 +1,24 @@
 .selectImgDiv .item{
-    border: solid thin #AAAAAA;
     float: left;
     cursor: pointer;
     overflow: hidden;
-	width:100%;
 	min-width:100px;
 	position:relative;
-}
-.selectImgDiv .item:hover{
-    border: solid thin #0099FF;
+	margin:15px;
 }
 .selectImgDiv .item .img_show{
     overflow: hidden;
+    border: solid thin #AAAAAA;
 }
 .selectImgDiv .item .img_show img{
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: 160px;
 }
 .selectImgDiv .item:hover .img_show img{
     transform: scale(1.3);
     transition: all 1s ease 0s;
     -webkit-transform: scale(1.3);
     -webkit-transform: all 1s ease 0s;
-}
-.selectImgDiv .item .img_title{
-    height: 30px;
-    text-align: center;
-    font-size: 16px;
-    line-height: 30px;
-    background-color: rgba(102,102,102,0.6);
-    position: relative;
-    color: #FFFFFF;
-    font-weight: 700;
 }
 
 .selectImgDiv .item .img_isCheck{

@@ -12,13 +12,6 @@
 <link rel="shortcut icon" type="image/x-icon" href="img/logo-html.jpg"
 	media="screen">
 <!-- / START - page related stylesheets [optional] -->
-<link
-	href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css"
-	media="all" rel="stylesheet" type="text/css" />
-<link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css"
-	media="all" rel="stylesheet" type="text/css" />
-<link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css"
-	media="all" rel="stylesheet" type="text/css" />
 <!-- / END - page related stylesheets [optional] -->
 <!-- / bootstrap [required] -->
 <link href="assets/stylesheets/bootstrap/bootstrap.css" media="all"
@@ -34,127 +27,23 @@
       <script src="assets/javascripts/ie/html5shiv.js" type="text/javascript"></script>
       <script src="assets/javascripts/ie/respond.min.js" type="text/javascript"></script>
     <![endif]-->
+    <script>
+    if(sessionStorage.userInfo==null){
+		window.open('login.html','_self');
+	}
+    </script>
 </head>
 <body class='contrast-fb '>
-	<header>
-		<nav class='navbar navbar-default head'>
-			<a class='navbar-brand' href='welcom.html'> <img class="logo"
-				alt="" src="img/head.png" />
-			</a>
-			<ul class='nav'>
-				<li><a class="login-info" href="javascript:void(0);"> <i
-						class='icon-user'></i> 你好，管理员
-				</a></li>
-				<li><a class="login-info border-double"
-					href='user_profile.html'> <i class='icon-lock'></i> 修改密码
-				</a></li>
-				<li><a class="login-info" id="logout"> <i
-						class='icon-signout'></i> 退出登录
-				</a></li>
-			</ul>
-		</nav>
-	</header>
+	<header id="head"> </header>
 	<div id='wrapper'>
 		<div id='main-nav-bg'></div>
 		<nav id='main-nav'>
 			<div class='navigation'>
-				<ul class='nav nav-stacked'>
+				<ul class='nav nav-stacked' id="menu">
 					<li class='active'><a href='welcom.html'> <i
 							class='icon-dashboard'></i> <span>首页</span>
 					</a></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>戒毒人员</span> <i
-							class='icon-angle-down angle-down'></i> </a>
 
-						<ul class='nav nav-stacked'>
-							<li class='active'><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>人员管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>调队操作</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>接收人员</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>点名管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>工间点名</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>查看当前点名</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>数据统计</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>所统计</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>大队统计</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>中队统计</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>系统管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>系统用户管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>单位管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>系统角色管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>管理员下发</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>日志管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>日志记录</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>日志删除</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>数据库管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>数据库备份</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>设备管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>管理设备</span>
-							</a></li>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>操作设备</span>
-							</a></li>
-						</ul></li>
 				</ul>
 			</div>
 		</nav>
@@ -171,7 +60,7 @@
 
 						<div class='alert alert-info alert-dismissable'>
 							<a class='close' data-dismiss='alert' href='#'>&times;</a>
-							欢迎使用XX系统，今天是XXXX年XX月XX日，星期X。
+							<span id="welcomInfo"></span>
 						</div>
 
 						<div class='row'>
@@ -188,23 +77,27 @@
 										<div class='col-sm-12'>
 											<div class='box-content box-statistic'>
 												<h4 class='title lead'>
-													在册人数：<span id="registeredNum">100</span></h4>
-												
-												<h4 class='title lead'>在所人数：<span id="extantNum">98</span>
-												</h4>	
-												<h4 class='title lead'>所外就医：<span
-														id="externalMedicalTreatment">2</span>
-												</h4>	
-												<h4 class='title lead'>出工人数：<span id="rollCallNum">95</span>
-												</h4>	
-												<h4 class='title lead'>无掌静脉人数：<span
-														id="noMetacarpalVein">5</span>
-												</h4>	
-												<h4 class='title lead'>无照片人数：<span id="noPhoto">2</span>
-												</h4>	
-												<h4 class='title lead'>异常掌静脉终端数：<span
-														id="abnormalDevice">0</span>
-												</h4>							
+													在册人数：<span id="registeredNum">100</span>
+												</h4>
+
+												<h4 class='title lead'>
+													在所人数：<span id="extantNum">98</span>
+												</h4>
+												<h4 class='title lead'>
+													所外就医：<span id="externalMedicalTreatment">2</span>
+												</h4>
+												<h4 class='title lead'>
+													出工人数：<span id="rollCallNum">95</span>
+												</h4>
+												<h4 class='title lead'>
+													无掌静脉人数：<span id="noMetacarpalVein">5</span>
+												</h4>
+												<h4 class='title lead'>
+													无照片人数：<span id="noPhoto">2</span>
+												</h4>
+												<h4 class='title lead'>
+													异常掌静脉终端数：<span id="abnormalDevice">0</span>
+												</h4>
 											</div>
 										</div>
 									</div>
@@ -248,41 +141,24 @@
 		type="text/javascript"></script>
 	<!-- / theme file [required] -->
 	<script src="assets/javascripts/theme.js" type="text/javascript"></script>
-	<!-- / demo file [not required!] -->
-	<script src="assets/javascripts/demo.js" type="text/javascript"></script>
-	<!-- / START - page related files and scripts [optional] -->
-	<script src="assets/javascripts/plugins/flot/excanvas.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/flot/flot.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/flot/flot.resize.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/common/moment.min.js"
-		type="text/javascript"></script>
-	<script
-		src="assets/javascripts/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/bootbox/bootbox.min.js"
-		type="text/javascript"></script>
-	<script
-		src="assets/javascripts/plugins/slimscroll/jquery.slimscroll.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/timeago/jquery.timeago.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/common/wysihtml5.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/common/bootstrap-wysihtml5.js"
-		type="text/javascript"></script>
-	<script
-		src="assets/javascripts/plugins/fullcalendar/fullcalendar.min.js"
-		type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/bootbox/bootbox.min.js"
-		type="text/javascript"></script>
 
+	<!-- / START - page related files and scripts [optional] -->
+	<script src="assets/javascripts/plugins/bootbox/bootbox.min.js"
+		type="text/javascript"></script>
 	<script src="js/highcharts.js" type="text/javascript"></script>
-	<script src="js/highcharts-zh_CN.js" type="text/javascript"></script>
+	<script src="js/highCharts-zh_CN.js" type="text/javascript"></script>
+	<script src="js/utils.js" type="text/javascript"></script>
+	<script src="js/header.js" type="text/javascript"></script>
 	<script type="text/javascript">
+		utils.getMenu("","");
 		$(function() {
+			var now=new Date();
+			var year=now.getFullYear();
+			var month=now.getMonth();
+			var date=now.getDate();
+			var day=now.getDay();
+			var week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+			$("#welcomInfo").text("欢迎使用人员管理系统，今天是"+year+"年"+month+"月"+date+","+week[day]);
 			$('#column')
 					.highcharts(
 							{
