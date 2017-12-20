@@ -28,127 +28,23 @@
       <script src="assets/javascripts/ie/html5shiv.js" type="text/javascript"></script>
       <script src="assets/javascripts/ie/respond.min.js" type="text/javascript"></script>
     <![endif]-->
+<script>
+    if(sessionStorage.userInfo==null){
+		window.open('login.html','_self');
+	}
+    </script>
 </head>
 <body class='contrast-fb'>
-	<header>
-		<nav class='navbar navbar-default head'>
-			<a class='navbar-brand' href='welcom.html'> <img class="logo"
-				alt="" src="img/head.png" />
-			</a>
-			<ul class='nav'>
-				<li><a class="login-info" href="javascript:void(0);"> <i
-						class='icon-user'></i> 你好，管理员
-				</a></li>
-				<li><a class="login-info border-double" id="changePass"
-					href="changePass.html"> <i class='icon-lock'></i> 修改密码
-				</a></li>
-				<li><a class="login-info" id="logout"> <i
-						class='icon-signout'></i> 退出登录
-				</a></li>
-			</ul>
-		</nav>
-	</header>
+	<header id="head"> </header>
 	<div id='wrapper'>
 		<div id='main-nav-bg'></div>
 		<nav id='main-nav'>
 			<div class='navigation'>
-				<ul class='nav nav-stacked'>
-					<li><a href='welcom.html'> <i class='icon-dashboard'></i>
-							<span>首页</span>
+				<ul class='nav nav-stacked' id="menu">
+					<li class='active'><a href='welcom.html'> <i
+							class='icon-dashboard'></i> <span>首页</span>
 					</a></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>戒毒人员</span> <i
-							class='icon-angle-down angle-down'></i> </a>
 
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>人员管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>调队操作</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>接收人员</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>点名管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>工间点名</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>查看当前点名</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>数据统计</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>所统计</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>大队统计</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>中队统计</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>系统管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>系统用户管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>单位管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>系统角色管理</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>管理员下发</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>日志管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>日志记录</span>
-							</a></li>
-							<li class=''><a href='form.html'> <i
-									class='icon-caret-right'></i> <span>日志删除</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>数据库管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>数据库备份</span>
-							</a></li>
-						</ul></li>
-					<li><a class="dropdown-collapse" href="#"><i
-							class='icon-edit'></i> <span>设备管理</span> <i
-							class='icon-angle-down angle-down'></i> </a>
-
-						<ul class='nav nav-stacked'>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>管理设备</span>
-							</a></li>
-							<li class=''><a href='table.html'> <i
-									class='icon-caret-right'></i> <span>操作设备</span>
-							</a></li>
-						</ul></li>
 				</ul>
 			</div>
 		</nav>
@@ -164,7 +60,7 @@
 									</h1>
 									<div class='pull-right'>
 										<ul class='breadcrumb'>
-											<li><a href='index.html'> <i class='icon-bar-chart'></i>
+											<li><a href='index.html'> <i class='icon-dashboard'></i>
 											</a></li>
 											<li class='separator'><i class='icon-angle-right'></i></li>
 											<li class='active'>修改密码</li>
@@ -260,9 +156,12 @@
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js"
 		type="text/javascript"></script>
 	<script src="js/header.js" type="text/javascript"></script>
+	<script src="js/utils.js" type="text/javascript"></script>
 	<script>
     $(document).ready(function() {
-    	//返回之前的页面并刷新
+    	utils.getMenu("","");
+    	
+    	//返回之前的页面
 	    $("#cancel").click(function() {
 	    	history.go(-1);
 		});

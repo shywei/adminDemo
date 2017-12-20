@@ -54,3 +54,13 @@ header .head {
 	line-height: 40px;
 	text-align:left;
 }
+.tab-label {
+	height: 35px;
+	line-height: 35px;
+	margin:2px;
+}
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}

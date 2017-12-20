@@ -77,26 +77,26 @@
 										<div class='col-sm-12'>
 											<div class='box-content box-statistic'>
 												<h4 class='title lead'>
-													在册人数：<span id="registeredNum">100</span>
+													在册人数：<span id="registeredNum"></span>
 												</h4>
 
 												<h4 class='title lead'>
-													在所人数：<span id="extantNum">98</span>
+													在所人数：<span id="extantNum"></span>
 												</h4>
 												<h4 class='title lead'>
-													所外就医：<span id="externalMedicalTreatment">2</span>
+													所外就医：<span id="externalMedicalTreatment"></span>
 												</h4>
 												<h4 class='title lead'>
-													出工人数：<span id="rollCallNum">95</span>
+													出工人数：<span id="rollCallNum"></span>
 												</h4>
 												<h4 class='title lead'>
-													无掌静脉人数：<span id="noMetacarpalVein">5</span>
+													无掌静脉人数：<span id="noMetacarpalVein"></span>
 												</h4>
 												<h4 class='title lead'>
-													无照片人数：<span id="noPhoto">2</span>
+													无照片人数：<span id="noPhoto"></span>
 												</h4>
 												<h4 class='title lead'>
-													异常掌静脉终端数：<span id="abnormalDevice">0</span>
+													异常掌静脉终端数：<span id="abnormalDevice"></span>
 												</h4>
 											</div>
 										</div>
@@ -152,13 +152,57 @@
 	<script type="text/javascript">
 		utils.getMenu("","");
 		$(function() {
+			//欢迎消息
 			var now=new Date();
 			var year=now.getFullYear();
 			var month=now.getMonth();
 			var date=now.getDate();
 			var day=now.getDay();
 			var week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
-			$("#welcomInfo").text("欢迎使用人员管理系统，今天是"+year+"年"+month+"月"+date+","+week[day]);
+			$("#welcomInfo").text("欢迎使用人员管理系统，今天是"+year+"年"+month+"月"+date+"，"+week[day]);
+
+			//统计数据
+			$.ajax({
+		        type: "post",
+		        async : false,
+		        url: utils.api_path+"/main/statistics",
+		        dataType: "json",
+		        contentType: "application/json;charset=utf-8",
+		        data:JSON.stringify({userId:JSON.parse(sessionStorage.userInfo).id
+		        }),
+		        success: function (data) {
+		        	if(data.code==0){
+		        		$("#registeredNum").text(data.obj.registeredNum);
+		        		$("#extantNum").text(data.obj.extantNum);
+		        		$("#externalMedicalTreatment").text(data.obj.externalMedicalTreatment);
+		        		$("#rollCallNum").text(data.obj.rollCallNum);
+		        		$("#noMetacarpalVein").text(data.obj.noMetacarpalVein);
+		        		$("#noPhoto").text(data.obj.noPhoto);
+		        		$("#abnormalDevice").text(data.obj.abnormalDevice);
+		        	}else{
+		        		bootbox.alert({
+		        		    message: data.message,
+		        		    buttons: {
+		        		        ok: {
+		        		            label: '确定'
+		        		        }
+		        		    },
+		        		    callback: function (result) {
+		        		    }
+		        		});
+		        	}
+		        },
+		        error: function (XMLHttpRequest, textStatus, errorThrown) {
+		        	bootbox.alert({
+		    		    message: "请求发生错误",
+		    		    buttons: {
+		    		        ok: {
+		    		            label: '确定'
+		    		        }
+		    		    }
+		    		});
+		        }
+		    });
 			$('#column')
 					.highcharts(
 							{

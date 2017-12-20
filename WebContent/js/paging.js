@@ -64,7 +64,7 @@
                 jumpBtn = $('#jumpBtn'),
                 jumpText = $('#jumpText');
 
-            prePage.on('click', function() {
+            /*prePage.on('click', function() {
                 pageIndex--;
                 if (pageIndex < 1) pageIndex = 1;
                 handles(pageIndex);
@@ -98,14 +98,14 @@
             lis.on('click', function() {
                 pageIndex = $(this).index() + 1;
                 handles(pageIndex);
-            })
+            })*/
 
             function handles(pageIndex) {
                 lis.removeClass('sel-page').eq(pageIndex - 1).addClass('sel-page');
-                if (totalPages <= 5) {
+                /*if (totalPages <= 5) {
                     that.options.callback(pageIndex);
                     return false;
-                }
+                }*/
                 if (pageIndex >= 3 && pageIndex <= totalPages - 2) distance = (pageIndex - 3) * liWidth;
                 if (pageIndex == 2 || pageIndex == 1) distance = 0;
                 if (pageIndex > totalPages - 2) distance = (totalPages - 5) * liWidth;
@@ -114,7 +114,7 @@
                 pageIndex == 1 ? prePage.attr('disabled', true) : prePage.attr('disabled', false);
                 pageIndex == totalPages ? lastPage.attr('disabled', true) : lastPage.attr('disabled', false);
                 pageIndex == totalPages ? nextPage.attr('disabled', true) : nextPage.attr('disabled', false);
-                that.options.callback(pageIndex);
+                //that.options.callback(pageIndex);
             }
 
             handles(that.options.pageNo); // 初始化页码位置

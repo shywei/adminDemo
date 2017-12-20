@@ -1,12 +1,13 @@
 var utils;
 window.utils=utils={
+	api_path:"http://localhost:8080/ServicePortal_webapi/api",
 	getMenu:function(menuName,modelName){
 		if(sessionStorage.menu==null){
 			//获取菜单
 			$.ajax({
 		        type: "post",
 		        async : false,
-		        url: "http://localhost:8080/ServicePortal_webapi/api/authority/getMenuById",
+		        url: utils.api_path+"/authority/getMenuById",
 		        dataType: "json",
 		        contentType: "application/json;charset=utf-8",
 		        data:JSON.stringify({loginUserId:JSON.parse(sessionStorage.userInfo).id
@@ -29,7 +30,7 @@ window.utils=utils={
 		        },
 		        error: function (XMLHttpRequest, textStatus, errorThrown) {
 		        	bootbox.alert({
-		    		    message: "系统错误",
+		    		    message: "请求发生错误",
 		    		    buttons: {
 		    		        ok: {
 		    		            label: '确定'
@@ -39,22 +40,24 @@ window.utils=utils={
 		        }
 		    });
 		}
-		var menu =JSON.parse(sessionStorage.menu);
-		for(var i=0;i<menu.obj.length;i++){
-			if(menu.obj[i].menuName==menuName){
-				var code = '<li class="active"><a class="dropdown-collapse in" href="#"><i class="'+menu.obj[i].icon+'"></i> <span>'+menu.obj[i].menuName+'</span> <i class="icon-angle-down angle-down"></i> </a> <ul class="in nav nav-stacked">';
-			}else{
-				var code = '<li><a class="dropdown-collapse" href="#"><i class="'+menu.obj[i].icon+'"></i> <span>'+menu.obj[i].menuName+'</span> <i class="icon-angle-down angle-down"></i> </a> <ul class="nav nav-stacked">';
-			}
-			for(var m=0;m<menu.obj[i].child.length;m++){
-				if(menu.obj[i].child[m].modelName==modelName){
-					code =code+'<li class="active"><a href="'+menu.obj[i].child[m].modelUrl+'"> <i class="icon-caret-right"></i> <span>'+menu.obj[i].child[m].modelName+'</span></a></li>';
+		if(sessionStorage.menu!=null){
+			var menu =JSON.parse(sessionStorage.menu);
+			for(var i=0;i<menu.obj.length;i++){
+				if(menu.obj[i].menuName==menuName){
+					var code = '<li class="active"><a class="dropdown-collapse in" href="#"><i class="'+menu.obj[i].icon+'"></i> <span>'+menu.obj[i].menuName+'</span> <i class="icon-angle-down angle-down"></i> </a> <ul class="in nav nav-stacked">';
 				}else{
-					code =code+'<li class=""><a href="'+menu.obj[i].child[m].modelUrl+'"> <i class="icon-caret-right"></i> <span>'+menu.obj[i].child[m].modelName+'</span></a></li>';
+					var code = '<li><a class="dropdown-collapse" href="#"><i class="'+menu.obj[i].icon+'"></i> <span>'+menu.obj[i].menuName+'</span> <i class="icon-angle-down angle-down"></i> </a> <ul class="nav nav-stacked">';
 				}
+				for(var m=0;m<menu.obj[i].child.length;m++){
+					if(menu.obj[i].child[m].modelName==modelName){
+						code =code+'<li class="active"><a href="'+menu.obj[i].child[m].modelUrl+'"> <i class="icon-caret-right"></i> <span>'+menu.obj[i].child[m].modelName+'</span></a></li>';
+					}else{
+						code =code+'<li class=""><a href="'+menu.obj[i].child[m].modelUrl+'"> <i class="icon-caret-right"></i> <span>'+menu.obj[i].child[m].modelName+'</span></a></li>';
+					}
+				}
+				code =code+'</ul></li>';
+				$("#menu").append(code);
 			}
-			code =code+'</ul></li>';
-			$("#menu").append(code);
 		}
 	},
 	getTime:function(){
